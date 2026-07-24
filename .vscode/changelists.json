@@ -3,7 +3,7 @@
     {
       "name": "Default",
       "files": [
-        "cypress/e2e/app.cy.js",
+        "Jenkinsfile",
         ".vscode/changelists.json"
       ]
     }
