@@ -1,6 +1,5 @@
 name: CI
 
-# Optional: rename the build run (displayName equivalent in GitHub Actions)
 run-name: "CI – ${{ github.ref_name }} (${{ github.actor }})"
 
 on:
@@ -72,28 +71,3 @@ jobs:
           list-suites: 'all'
           list-tests: 'failed'
 
-  deploy:
-    needs: [unit-test, integration-test]
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-output
-          path: public/
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::123456789012:role/cicd-workshop-deployer
-          aws-region: eu-central-1
-      - name: Deploy to S3
-        run: |
-          aws s3 sync public/ s3://cicd-workshop-playground/${{ github.repository_owner }}/ --storage-class STANDARD
-      - name: Build description
-        if: always()
-        run: |
-          echo "::notice title=Build description::CI run for ${{ github.ref_name }} by ${{ github.actor }} (${{ github.sha }})"
