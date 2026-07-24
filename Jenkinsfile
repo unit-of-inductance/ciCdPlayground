@@ -17,7 +17,7 @@ pipeline {
             }
         }
 
-        stage('test') {
+        stage('unit tests') {
             steps {
                 sh 'yarn test'
             }
