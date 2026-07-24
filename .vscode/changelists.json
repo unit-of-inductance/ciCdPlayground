@@ -3,8 +3,7 @@
     {
       "name": "Default",
       "files": [
-        "Jenkinsfile",
-        ".vscode/changelists.json"
+        "Jenkinsfile"
       ]
     }
   ],

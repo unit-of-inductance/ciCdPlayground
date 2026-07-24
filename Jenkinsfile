@@ -58,6 +58,11 @@ pipeline {
 
     post {
         always {
+            script {
+                // Optional: rename the build (displayName) and add a description
+                currentBuild.displayName = "#${env.BUILD_NUMBER} – ${env.GIT_BRANCH}"
+                currentBuild.description = "CI run for ${env.GIT_URL}"
+            }
             junit testResults: '**/reports/**/*.xml',
                 allowEmptyResults: true,
                 keepLongStdio: true
